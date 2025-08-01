@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Essential color variables in HEX format */
+  :root {
+    --background: #f8f8f8;
+    --foreground: #000000;
+    --primary: #f4e041;
+    --primary-foreground: #000000;
+    --border: #d0cfcf;
+    --input: #d0cfcf;
+    --radius: 0.5rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      'Nunito',
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      sans-serif;
+  }
+
+  /* Hero section background with responsive images */
+
+  .hero-background {
+    --hero-image: url('/images/hero_image.webp');
+    background: var(--hero-image) lightgray -446.56px -317.009px / 342.315% 164.03% no-repeat;
+  }
+
+  /* Mobile retina */
+  @media (-webkit-min-device-pixel-ratio: 2) and (max-width: 639px),
+    (min-resolution: 192dpi) and (max-width: 639px) {
+    .hero-background {
+      --hero-image: url('/images/hero_image@2x.webp');
+    }
+  }
+
+  /* Small screens (sm: 640px and up) */
+  @media (min-width: 640px) {
+    .hero-background {
+      --hero-image: url('/images/hero_image_sm.webp');
+    }
+  }
+
+  /* Large screens (lg: 1024px and up) */
+  @media (min-width: 1024px) {
+    .hero-background {
+      --hero-image: url('/images/hero_image_lg.webp');
+    }
+  }
+
+  /* Large screens retina */
+  @media (-webkit-min-device-pixel-ratio: 2) and (min-width: 1024px),
+    (min-resolution: 192dpi) and (min-width: 1024px) {
+    .hero-background {
+      --hero-image: url('/images/hero_image_lg@2x.webp');
+    }
+  }
+
+  /* Extra large screens (xl: 1280px and up) */
+  @media (min-width: 1280px) {
+    .hero-background {
+      --hero-image: url('/images/hero_image_xl.webp');
+    }
+  }
+
+  /* Extra large screens retina */
+  @media (-webkit-min-device-pixel-ratio: 2) and (min-width: 1280px),
+    (min-resolution: 192dpi) and (min-width: 1280px) {
+    .hero-background {
+      --hero-image: url('/images/hero_image_xl@2x.webp');
+    }
+  }
+}
