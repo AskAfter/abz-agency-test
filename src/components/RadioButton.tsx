@@ -18,9 +18,10 @@ export function RadioButton({
   label,
 }: RadioButtonProps) {
   return (
-    <label className="flex items-center gap-3 cursor-pointer">
+    <label htmlFor={id} className="flex items-center gap-3 cursor-pointer">
       <div className="relative">
         <input
+          id={id}
           type="radio"
           name={name}
           value={value}
