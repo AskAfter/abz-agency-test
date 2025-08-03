@@ -1,4 +1,4 @@
 export { HeroSection } from './HeroSection';
-export { UsersSection } from './UsersSection';
-export { SignUpSection } from './SignUpSection';
 export { Header } from './Header';
+// UsersSection and SignUpSection are lazy loaded in Index.tsx
+// to avoid static/dynamic import conflicts
