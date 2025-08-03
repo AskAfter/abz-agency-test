@@ -7,12 +7,29 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" /></noscript>
+    
+    <!-- Preload critical hero images -->
+    <link rel="preload" href="/images/hero_image.webp" as="image" media="(max-width: 639px)" />
+    <link rel="preload" href="/images/hero_image_sm.webp" as="image" media="(min-width: 640px) and (max-width: 1023px)" />
+    <link rel="preload" href="/images/hero_image_lg.webp" as="image" media="(min-width: 1024px)" />
+
     <!-- Meta tags -->
     <meta
       name="description"
       content="Test assignment for front-end developer position at ABZ Agency"
     />
     <meta name="author" content="ABZ Agency" />
+    
+    <!-- Performance optimization meta tags -->
+    <meta name="theme-color" content="#f4e041" />
+    <meta name="color-scheme" content="light" />
 
     <title>ABZ Agency Test Task</title>
   </head>
