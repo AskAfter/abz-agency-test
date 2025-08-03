@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { Button } from '../Button';
 import { UserCard } from '../UserCard';
 import { fetchUsers } from '../../services/api';
@@ -8,7 +8,7 @@ interface UsersSectionProps {
   id?: string;
 }
 
-export function UsersSection({ id }: UsersSectionProps = {}) {
+function UsersSectionComponent({ id }: UsersSectionProps = {}) {
   const [users, setUsers] = useState<User[]>([]);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
@@ -37,7 +37,7 @@ export function UsersSection({ id }: UsersSectionProps = {}) {
     setHasMore(true);
   }, []);
 
-  const handleShowMore = async () => {
+  const handleShowMore = useCallback(async () => {
     if (!hasMore || loading) return;
 
     setLoading(true);
@@ -54,7 +54,7 @@ export function UsersSection({ id }: UsersSectionProps = {}) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [hasMore, loading, page]);
 
   return (
     <section id={id} className="py-[140px] flex flex-col items-center">
@@ -84,3 +84,6 @@ export function UsersSection({ id }: UsersSectionProps = {}) {
     </section>
   );
 }
+
+// Memoize UsersSection to prevent unnecessary re-renders
+export const UsersSection = memo(UsersSectionComponent);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { PhoneInput } from '../PhoneInput';
@@ -11,7 +11,7 @@ interface SignUpSectionProps {
   id?: string;
 }
 
-export function SignUpSection({ onUserRegistered, id }: SignUpSectionProps) {
+function SignUpSectionComponent({ onUserRegistered, id }: SignUpSectionProps) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -31,19 +31,19 @@ export function SignUpSection({ onUserRegistered, id }: SignUpSectionProps) {
     photo?: string;
   }>({});
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  }, []);
 
-  const handlePositionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePositionChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({ ...prev, position_id: parseInt(e.target.value) }));
-  };
+  }, []);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     setFormData(prev => ({ ...prev, photo: file }));
-  };
+  }, []);
 
   // Load positions on component mount
   useEffect(() => {
@@ -275,3 +275,6 @@ export function SignUpSection({ onUserRegistered, id }: SignUpSectionProps) {
     </section>
   );
 }
+
+// Memoize SignUpSection to prevent unnecessary re-renders
+export const SignUpSection = memo(SignUpSectionComponent);
