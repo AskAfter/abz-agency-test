@@ -24,29 +24,34 @@ export function PhoneInput({
   const displayLabel = placeholder || 'Phone';
   const inputId = `input-${name}`;
 
-  // Format phone number to (xxx)-xxx-xx-xx
+  // Format phone number to (0xx)-xxx-xx-xx
   const formatPhoneNumber = (phoneNumber: string) => {
     // Remove all non-digits
     const digits = phoneNumber.replace(/\D/g, '');
 
-    // If it starts with 38, remove it as we'll add +38 prefix
-    const cleanDigits = digits.startsWith('38') ? digits.slice(2) : digits;
-
-    // Limit to 10 digits after +38
-    const limitedDigits = cleanDigits.slice(0, 10);
-
-    // Format as (0xx)-xxx-xx-xx
-    if (limitedDigits.length === 0) return '';
-
-    // Ensure first digit is 0, if not present, add it
-    let workingDigits = limitedDigits;
-    if (workingDigits.length > 0 && !workingDigits.startsWith('0')) {
-      workingDigits = '0' + workingDigits.slice(0, 9); // Limit to 9 more digits after 0
+    // Extract digits after +38 prefix (if present)
+    let workingDigits = '';
+    if (digits.startsWith('38')) {
+      // Remove +38 prefix and use remaining digits
+      workingDigits = digits.slice(2);
+    } else {
+      // Use all digits as they are
+      workingDigits = digits;
     }
 
-    // Limit to 10 digits total (including the 0)
+    // Ensure we have exactly 10 digits for a valid Ukrainian phone number
+    // Ukrainian mobile numbers are 10 digits after +38 (0XXXXXXXXX format)
+    if (workingDigits.length === 0) return '';
+
+    // Ensure first digit is 0 for Ukrainian mobile format
+    if (!workingDigits.startsWith('0')) {
+      workingDigits = '0' + workingDigits;
+    }
+
+    // Limit to exactly 10 digits
     workingDigits = workingDigits.slice(0, 10);
 
+    // Format as (0xx)-xxx-xx-xx
     if (workingDigits.length <= 3) return `(${workingDigits})`;
     if (workingDigits.length <= 6)
       return `(${workingDigits.slice(0, 3)})-${workingDigits.slice(3)}`;
@@ -75,8 +80,19 @@ export function PhoneInput({
     const withoutPrefix = inputValue.replace(/^\+38\s?/, '');
     const digits = withoutPrefix.replace(/\D/g, '');
 
-    // Return in format +38xxxxxxxxxx for storage
-    return digits ? `+38${digits}` : '';
+    if (!digits) return '';
+
+    // Ensure first digit is 0 for Ukrainian mobile format
+    let workingDigits = digits;
+    if (!workingDigits.startsWith('0')) {
+      workingDigits = '0' + workingDigits;
+    }
+
+    // Limit to exactly 10 digits (Ukrainian mobile format: 0XXXXXXXXX)
+    workingDigits = workingDigits.slice(0, 10);
+
+    // Return in format +38xxxxxxxxxx for storage (only if we have at least some digits)
+    return workingDigits ? `+38${workingDigits}` : '';
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
