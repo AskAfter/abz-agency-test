@@ -31,19 +31,28 @@ function SignUpSectionComponent({ onUserRegistered, id }: SignUpSectionProps) {
     photo?: string;
   }>({});
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  }, []);
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setFormData(prev => ({ ...prev, [name]: value }));
+    },
+    []
+  );
 
-  const handlePositionChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({ ...prev, position_id: parseInt(e.target.value) }));
-  }, []);
+  const handlePositionChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData(prev => ({ ...prev, position_id: parseInt(e.target.value) }));
+    },
+    []
+  );
 
-  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setFormData(prev => ({ ...prev, photo: file }));
-  }, []);
+  const handleFileChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0] || null;
+      setFormData(prev => ({ ...prev, photo: file }));
+    },
+    []
+  );
 
   // Load positions on component mount
   useEffect(() => {
@@ -232,12 +241,12 @@ function SignUpSectionComponent({ onUserRegistered, id }: SignUpSectionProps) {
           <div className="mt-[47px]">
             <div className="flex">
               <label className="flex w-full">
-                <div className="w-[83px] h-[54px] border border-black-87 rounded-l bg-white flex items-center justify-center cursor-pointer">
+                <div className="w-[83px] h-[54px] border border-black-87 rounded-l bg-transparent flex items-center justify-center cursor-pointer">
                   <span className="text-black-87 font-nunito text-base leading-[26px]">
                     Upload
                   </span>
                 </div>
-                <div className="flex-1 h-[54px] border border-border-gray border-l-0 rounded-r bg-white flex items-center px-4 overflow-hidden">
+                <div className="flex-1 h-[54px] border border-border-gray border-l-0 rounded-r bg-transparent flex items-center px-4 overflow-hidden">
                   <span
                     className={`font-nunito text-base leading-[26px] truncate block w-full ${formData.photo ? 'text-black-87' : 'text-gray-light'}`}
                     title={formData.photo?.name}

@@ -54,20 +54,32 @@ export function Input({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           required={required}
-          aria-describedby={hasError ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined}
+          aria-describedby={
+            hasError
+              ? `${inputId}-error`
+              : helperText
+                ? `${inputId}-helper`
+                : undefined
+          }
           aria-invalid={hasError}
-          className={`w-full h-[54px] px-4 border rounded bg-white text-black-87 font-nunito text-base focus:outline-none ${
+          className={`w-full h-[54px] px-4 border rounded bg-transparent text-black-87 font-nunito text-base focus:outline-none ${
             hasError ? 'border-red-500' : 'border-border-gray'
           }`}
         />
       </div>
       {helperText && !hasError && (
-        <div id={`${inputId}-helper`} className="text-gray-light font-nunito text-xs leading-[14px]">
+        <div
+          id={`${inputId}-helper`}
+          className="text-gray-light font-nunito text-xs leading-[14px]"
+        >
           {helperText}
         </div>
       )}
       {hasError && (
-        <div id={`${inputId}-error`} className="text-red-500 font-nunito text-xs leading-[14px]">
+        <div
+          id={`${inputId}-error`}
+          className="text-red-500 font-nunito text-xs leading-[14px]"
+        >
           {errorText}
         </div>
       )}
