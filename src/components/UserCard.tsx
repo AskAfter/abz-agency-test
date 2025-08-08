@@ -59,19 +59,19 @@ function UserCardComponent({ user }: UserCardProps) {
           {user.name}
         </h3>
         <div className="text-black-87 font-nunito text-base leading-[26px] font-normal">
-          <div className="truncate px-2" title={user.position}>
+          <div className="truncate px-0" title={user.position}>
             {user.position}
           </div>
-          <div className="relative inline-block w-full">
-            <div 
-              className="truncate px-2 cursor-pointer"
+          <div className="relative block w-full">
+            <div
+              className="truncate px-0 cursor-pointer"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
               {user.email}
             </div>
             {showEmailTooltip && (
-              <div 
+              <div
                 className="absolute bg-black text-white font-nunito text-base leading-[26px] font-normal whitespace-nowrap z-50"
                 style={{
                   padding: '3px 16px',
@@ -79,14 +79,14 @@ function UserCardComponent({ user }: UserCardProps) {
                   backgroundColor: '#000000de',
                   top: 'calc(100% + 4px)',
                   right: '8px',
-                  minWidth: 'max-content'
+                  minWidth: 'max-content',
                 }}
               >
                 {user.email}
               </div>
             )}
           </div>
-          <div className="truncate px-2" title={user.phone}>
+          <div className="truncate px-0" title={user.phone}>
             {user.phone}
           </div>
         </div>
